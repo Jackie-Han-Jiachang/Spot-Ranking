@@ -6,6 +6,6 @@ public class InitDB {
         Connection conn = DriverManager.getConnection(
             "jdbc:h2:file:/Users/jackyhan/Java/h2/data/attractionDB", "sa", "");
         conn.close();
-        System.out.println("连接成功，数据库文件应已生成");
+        System.out.println("Connnected");
     }
 }
