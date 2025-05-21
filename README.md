@@ -2,7 +2,7 @@
 
 ## The initiation of the project
 
-## Scenario
+### Scenario
 
 The project is an online notebook that can keep records of places people have traveled before.
 
