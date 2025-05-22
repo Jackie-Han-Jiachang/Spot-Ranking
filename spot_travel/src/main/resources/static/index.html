@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hello World</title>
+    <meta charset="UTF-8">
+    <!-- This one is for the page name -->
+    <title>Comments on Attractions</title>
+    <!-- Import jQuery for JavaScript to simplify DOM manipulation and use ajax -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <sciptt src="/app.js"></sciptt>
 </head>
 <body>
-    <h1>Hello World</h1>
-    <p>This is a static page Hello World</p>
+    <h1>Attraction Comment System</h1>
+    <h2>Add a new attraction</h2>
+    <form id = "addAttractionForm">
+    <label>Name:</label>
+    <input type="text" id="attractionName" required>
+    <label>Location:</label>
+    <input type="text" id="attractionLocation" required>
+    <button id="addAttraction">Add</button>
+    </form>
+    <h2>Existing Attractions</h2>
+    <ul id="attractionList"></ul>
 </body>
 </html>
