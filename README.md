@@ -53,3 +53,16 @@ To make travel planning easier and more efficient. Since people are busy with wo
 | 7           | Update "View Reviews" button             | Clicking "View reviews" opens `view-reviews.html`. Spring Boot fetches reviews as JSON, JavaScript displays them in the new window.                                                                                                                                                                                                                                                                                                         | 1 day          | 27-May                 |
 | 8           | Make the webpage more beautiful and readable | Use CSS to style buttons, colors, fonts, and improve layout and readability.                                                                                                                                                                                                                                                                                                                                                                                                     | 1 day          | 28-May                 |
 | 9           | Test and feedback                        | Share the site with classmates for feedback and test if it can handle 10+ reviews. Update based on their input.                                                                                                                                                                                                                                                                                                                                                                   | 1 day          | 29-May                 |
+
+## Functions so Far
+
+### Frontend
+
+- A basic HTML can be displayed
+- Users can type in their new attractions with name and location.
+- The new attraction can be displayed underneath.
+
+### Backend
+
+- Basic controller is setup. JavaScript works well.
+- Dao is set up with hard coded SQL, but it can access to database and do some basic operations.
