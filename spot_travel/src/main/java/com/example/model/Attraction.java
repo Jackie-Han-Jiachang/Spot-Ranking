@@ -3,14 +3,19 @@ package com.example.model;
 public class Attraction {
     private String name;
     private String location;
-    private String description;
+    private String id;
 
-    public void Attrction(String name, String description, String location) {
+    public void Attrction(String id, String name, String description, String location) {
+        this.id = id;
         this.name = name;
         this.location = location;
-        this.description = description;
     }
-
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
     public String getName() {
         return name;
     }
@@ -22,12 +27,6 @@ public class Attraction {
     }  
     public void setLocation(String location) {
         this.location = location;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
     }
     
 }

@@ -1,12 +1,12 @@
-$(docuemnt).ready(function() {
+$(document).ready(function() {
     function loadAttraction() {
         $.get("/api/attractions", function(data) {
             $("#attractionList").empty();
-            data.array.forEach(attraction => {
+            data.forEach(attraction => {
                 // add the attraction to the list
-                <li>
-                ${attraction.name} - ${attraction.location}
-                </li>
+                $("#attractionList").append(`
+                    <li>${attraction.name} - ${attraction.location}</li>
+                `);
             });
         });
     }
@@ -32,7 +32,7 @@ $(docuemnt).ready(function() {
     });
     }
 
-    // operatior
+    // operator
     if (window.location.pathname === "/index.html" || window.location.pathname === "/") {
         loadAttraction();
         $("#addAttractionForm").on("submit", function(event) {

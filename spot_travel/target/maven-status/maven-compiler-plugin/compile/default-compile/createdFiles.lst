@@ -1,2 +1,4 @@
-com/example/spotApp.class
+com/example/controller/AttractionController.class
+com/example/SpotApp.class
 com/example/model/Attraction.class
+com/example/dao/AttractionDao.class
