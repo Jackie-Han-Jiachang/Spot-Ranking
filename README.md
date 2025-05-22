@@ -58,11 +58,11 @@ To make travel planning easier and more efficient. Since people are busy with wo
 
 ### Frontend
 
-- A basic HTML can be displayed
-- Users can type in their new attractions with name and location.
-- The new attraction can be displayed underneath.
+- A basic HTML can be displayed. (5/20/2025)
+- Users can type in their new attractions with name and location. (5/22/2025)
+- The new attraction can be displayed underneath. (5/22/2025)
 
 ### Backend
 
-- Basic controller is setup. JavaScript works well.
-- Dao is set up with hard coded SQL, but it can access to database and do some basic operations.
+- Basic controller is setup. JavaScript works well. (5/22/2025)
+- Dao is set up with hard coded SQL, but it can access to database and do some basic operations. (5/22/2025)
