@@ -49,6 +49,11 @@ public class AttractionDao {
         return jdbcTemplate.query(sql, (rs, rowNum) -> mapToAttraction(rs,rowNum));
     }
 
+    public void deleteAttraction(String id) {
+        String sql = "Delete From attractions Where id = ?";
+        jdbcTemplate.update(sql, id);
+    }
+
 
 
 
