@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Add Review</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/app.js"></script>
+  </head>
+  <body>
+    <h1>Add a New Review for Attraction</h1>
+    <form id="addReviewForm">
+      <label for="userName">User Name:</label>
+      <input type="text" id="userName" required />
+
+      <label for="reviewText">Review:</label>
+      <textarea id="reviewText" required></textarea>
+
+      <label for="reviewText">Grade (1~5):</label>
+      <input type="number" id="grade" min="1" max="5" required />>
+
+      <button type="submit">Add Review</button>
+    </form>
+    <a href="/index.html"> <button>Back to Home</button></a>
+  </body>
+</html>
