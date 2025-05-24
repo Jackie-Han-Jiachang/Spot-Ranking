@@ -62,9 +62,13 @@ To make travel planning easier and more efficient. Since people are busy with wo
 - Users can type in their new attractions with name and location. (5/22/2025)
 - The new attraction can be displayed underneath. (5/22/2025)
 - Add remove attraction to the website. After adding it to the website, the user can add or remove the attractions. (5/23/2025)
+- A new `addReveiw.html` is added to the frontend. User can type in new review for each attraction. However, they still cannot see what comments have been posted. (5/24/2025)
+- JavaSript can send the review to the backend. (5/24/2025)
 
 ### Backend
 
 - Basic controller is setup. JavaScript works well. (5/22/2025)
 - Dao is set up with hard coded SQL, but it can access to database and do some basic operations. (5/22/2025)
 - Dao is upsdated with `deleteAttraction(String id)` method to help fulfill the remove method. (5/23/2025)
+- Dao can insert a new review to the database. Two tables are stored in the database `Review` and `Attraction`. (5/24/2025)  
+- A new model `Review` is intiated. (5/24/2025)
