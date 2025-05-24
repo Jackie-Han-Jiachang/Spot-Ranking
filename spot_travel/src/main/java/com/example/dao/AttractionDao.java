@@ -54,6 +54,10 @@ public class AttractionDao {
         jdbcTemplate.update(sql, id);
     }
 
+    public List<Attraction> getAttractionById(String id) {
+        String sql = "Select * From attractions Where id = ?";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> mapToAttraction(rs,rowNum), id);
+    }
 
 
 

@@ -90,15 +90,15 @@ function removeAttraction(id) {
   });
 }
 
-function addReview(id) {
+function addReview(attractionId) {
   const review = {
-    attraction: { id: attractionId },
-    username: $("#userName").val(),
+    attraction: {id : attractionId},
+    userName: $("#userName").val(),
     comment: $("#comment").val(),
     grade: parseInt($("#grade").val()),
   };
   $.ajax({
-    url: "api/reviews",
+    url: "/api/reviews",
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify(review),
