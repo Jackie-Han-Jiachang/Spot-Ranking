@@ -31,6 +31,7 @@ public class ReviewDao {
 
     public void save(Review review) {
         String sql = "Insert Into reviews (attractionId, userName, comment, grade) Values (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, review.getAttraction().getId(), review.getUserName(), review.getComment(), review.getGrade());
+        jdbcTemplate.update(sql, review.getAttraction().getId(), review.getUserName(), review.getComment(),
+                review.getGrade());
     }
 }

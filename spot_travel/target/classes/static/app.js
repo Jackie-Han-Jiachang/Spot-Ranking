@@ -13,10 +13,10 @@ $(document).ready(function () {
     });
   }
   // add review page
-   if (
+  if (
     window.location.pathname === "/addReview.html" ||
     window.location.pathname === "/addReview"
-   ) {
+  ) {
     const urlParams = new URLSearchParams(window.location.search);
     attractionId = urlParams.get("id");
     loadAttractionForReview(attractionId);
@@ -47,11 +47,11 @@ function loadAttractionForReview(attractionId) {
   $.get("/api/attractions/" + attractionId, function (data) {
     $("#attractionName").text(data.name);
     $("#attractionLocation").text(data.location);
-    }).fail(function() {
-        alert("Failed to load attraction data");
-        window.location.href = "/index.html";
-    });
-  };
+  }).fail(function () {
+    alert("Failed to load attraction data");
+    window.location.href = "/index.html";
+  });
+}
 
 // add an location (name and location)
 function addAttraction() {
@@ -92,7 +92,7 @@ function removeAttraction(id) {
 
 function addReview(attractionId) {
   const review = {
-    attraction: {id : attractionId},
+    attraction: { id: attractionId },
     userName: $("#userName").val(),
     comment: $("#comment").val(),
     grade: parseInt($("#grade").val()),
