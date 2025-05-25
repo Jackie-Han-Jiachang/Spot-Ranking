@@ -54,7 +54,7 @@ To make travel planning easier and more efficient. Since people are busy with wo
 | 8           | Make the webpage more beautiful and readable | Use CSS to style buttons, colors, fonts, and improve layout and readability.                                                                                                                                                                                                                                                                                                                                                                                                     | 1 day          | 28-May                 |
 | 9           | Test and feedback                        | Share the site with classmates for feedback and test if it can handle 10+ reviews. Update based on their input.                                                                                                                                                                                                                                                                                                                                                                   | 1 day          | 29-May                 |
 
-## Functions so Far
+## Develop log
 
 ### Frontend
 
@@ -64,6 +64,8 @@ To make travel planning easier and more efficient. Since people are busy with wo
 - Add remove attraction to the website. After adding it to the website, the user can add or remove the attractions. (5/23/2025)
 - A new `addReveiw.html` is added to the frontend. User can type in new review for each attraction. However, they still cannot see what comments have been posted. (5/24/2025)
 - JavaSript can send the review to the backend. (5/24/2025)
+- Each attraction is followed by buttons "View Reviews". (5/25/2025)
+- A new `viewReview.html` is updated. Users can view previous reviews and delete the reviews from it. (5/25/2025)
 
 ### Backend
 
@@ -72,3 +74,4 @@ To make travel planning easier and more efficient. Since people are busy with wo
 - Dao is upsdated with `deleteAttraction(String id)` method to help fulfill the remove method. (5/23/2025)
 - Dao can insert a new review to the database. Two tables are stored in the database `Review` and `Attraction`. (5/24/2025)  
 - A new model `Review` is intiated. (5/24/2025)
+- DAO updated to comply with the functions `viewReviews` and `deleteReveiews` (5/25/2025)
