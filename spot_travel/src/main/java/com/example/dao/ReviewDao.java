@@ -2,6 +2,7 @@ package com.example.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,7 +18,7 @@ public class ReviewDao {
     @Autowired
     private AttractionDao attractionDao;
 
-    private Review mapRowToReview(ResultSet rs, int rowNum) throws SQLException {
+    private Review mapToReview(ResultSet rs, int rowNum) throws SQLException {
         Review review = new Review();
         review.setId(rs.getString("id"));
         review.setUserName(rs.getString("userName"));
@@ -31,7 +32,16 @@ public class ReviewDao {
 
     public void save(Review review) {
         String sql = "Insert Into reviews (attractionId, userName, comment, grade) Values (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, review.getAttraction().getId(), review.getUserName(), review.getComment(),
-                review.getGrade());
+        jdbcTemplate.update(sql, review.getAttraction().getId(), review.getUserName(), review.getComment(), review.getGrade());
+    }
+
+    public List<Review> getReviewsById(String attractionId) {
+        String sql = "Select * From reviews Where attractionId = ?";
+        return jdbcTemplate.query(sql, (rs, rowNum) -> mapToReview(rs, rowNum), attractionId);
+    }
+
+    public void deleteReview(String id) {
+        String sql = "Delete From reviews Where id = ?";
+        jdbcTemplate.update(sql, id);
     }
 }

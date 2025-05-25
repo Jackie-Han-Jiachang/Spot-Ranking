@@ -25,6 +25,17 @@ $(document).ready(function () {
       addReview(attractionId);
     });
   }
+
+  // view review page
+  if (
+    window.location.pathname === "/viewReview.html" ||
+    window.location.pathname === "/viewReview"
+  ) {
+    const urlParams = new URLSearchParams(window.location.search);
+    attractionId = urlParams.get("id");
+    loadAttractionForReview(attractionId);
+    loadReviews(attractionId);
+  }
 });
 
 function loadAttraction() {
@@ -37,6 +48,7 @@ function loadAttraction() {
                     ${attraction.name} - ${attraction.location}
                     <button onclick="removeAttraction('${attraction.id}')"> Remove </button>
                     <a href="addReview.html?id=${attraction.id}"> <button> New Review </button </a>
+                    <a href="viewReview.html?id=${attraction.id}"> <button> View Review </button </a>
                     </li>
                 `);
     });
@@ -49,6 +61,27 @@ function loadAttractionForReview(attractionId) {
     $("#attractionLocation").text(data.location);
   }).fail(function () {
     alert("Failed to load attraction data");
+    window.location.href = "/index.html";
+  });
+}
+
+function loadReviews(attractionId) {
+
+    $.get("/api/reviews/" + attractionId, function (reviews) {
+      $("#reviewList").empty();
+      reviews.forEach((review) => {
+        // add the review to the list
+        $("#reviewList").append(`
+          <li>
+            <p>User: ${review.userName}</p>
+            <p>Review: ${review.comment}</p>
+            <p>Grade: ${review.grade}</p>
+            <button onclick="removeReview('${review.id}')"> Remove </button>
+          </li>
+        `);
+      });
+    }).fail(function () {
+    alert("Failed to load reviews");
     window.location.href = "/index.html";
   });
 }
@@ -111,3 +144,16 @@ function addReview(attractionId) {
     },
   });
 }
+
+function removeReview(id){
+    $.ajax({
+      url: "/api/reviews/" + id,
+      type: "DELETE",
+      success: function () {
+        loadReviews(attractionId);
+      },
+      error: function () {
+        alert("Delete failed, please try again...");
+      },
+    })
+  }

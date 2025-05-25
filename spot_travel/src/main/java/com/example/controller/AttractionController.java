@@ -50,4 +50,13 @@ public class AttractionController {
         return review;
     }
 
+    @GetMapping("/reviews/{id}")
+    public List<Review> getReviewsById(@PathVariable("id") String id) {
+        return reviewDao.getReviewsById(id);
+    }
+
+    @DeleteMapping("/reviews/{id}")
+    public void deleteReview(@PathVariable("id") String id) {
+        reviewDao.deleteReview(id);
+    }
 }
