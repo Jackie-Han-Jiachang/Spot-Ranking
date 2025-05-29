@@ -3,19 +3,11 @@ package com.example.model;
 public class Review {
     private String id;
     private Attraction attraction;
-    private String userName;
+    private User user;
     private String comment;
     private int grade;
 
     public Review() {
-    }
-
-    public Review(String id, Attraction attractionId, String userName, String comment, int grade) {
-        this.id = id;
-        this.attraction = attractionId;
-        this.userName = userName;
-        this.comment = comment;
-        this.grade = grade;
     }
 
     public String getId() {
@@ -34,12 +26,12 @@ public class Review {
         this.attraction = attraction;
     }
 
-    public String getUserName() {
-        return userName;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getComment() {

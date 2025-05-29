@@ -9,17 +9,14 @@
   <body>
     <h1>Add a New Review for Attraction</h1>
     <form id="addReviewForm">
-      <label for="userName">User Name:</label>
-      <input type="text" id="userName" required />
-
       <label for="reviewText">Review:</label>
-      <textarea id="comment" required></textarea>
+      <textarea id="comment" name="comment" required></textarea>
 
       <label for="reviewText">Grade (1~5):</label>
-      <input type="number" id="grade" min="1" max="5" required />>
+      <input type="number" id="grade" name="grade" min="1" max="5" required />>
 
       <button type="submit">Add Review</button>
     </form>
-    <a href="/index.html"> <button>Back to Home</button></a>
+    <a href="/attraction.html"> <button>Back to Home</button></a>
   </body>
 </html>

@@ -49,6 +49,8 @@ public class AttractionDao {
     }
 
     public void deleteAttraction(String id) {
+        String deleteReviewsSql = "DELETE FROM reviews WHERE attractionId = ?";
+        jdbcTemplate.update(deleteReviewsSql, id);
         String sql = "Delete From attractions Where id = ?";
         jdbcTemplate.update(sql, id);
     }

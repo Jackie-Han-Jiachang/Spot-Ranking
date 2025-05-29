@@ -1,4 +1,8 @@
 com/example/controller/AttractionController.class
 com/example/SpotApp.class
-com/example/model/Attraction.class
 com/example/dao/AttractionDao.class
+com/example/model/User.class
+com/example/model/Attraction.class
+com/example/model/Review.class
+com/example/dao/UserDao.class
+com/example/dao/ReviewDao.class

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.model.Attraction;
 import com.example.model.Review;
+import com.example.model.User;
 
 @Repository
 public class ReviewDao {
@@ -17,22 +18,27 @@ public class ReviewDao {
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private AttractionDao attractionDao;
+    @Autowired
+    private UserDao userDao;
 
     private Review mapToReview(ResultSet rs, int rowNum) throws SQLException {
         Review review = new Review();
         review.setId(rs.getString("id"));
-        review.setUserName(rs.getString("userName"));
         review.setComment(rs.getString("comment"));
         review.setGrade(rs.getInt("grade"));
         String attractionId = rs.getString("attractionId");
         Attraction attraction = attractionDao.getAttractionById(attractionId).get(0);
         review.setAttraction(attraction);
+
+        String userId = rs.getString("userId");
+        User user = userDao.getUserById(userId).get(0);
+        review.setUser(user);
         return review;
     }
 
     public void save(Review review) {
-        String sql = "Insert Into reviews (attractionId, userName, comment, grade) Values (?, ?, ?, ?)";
-        jdbcTemplate.update(sql, review.getAttraction().getId(), review.getUserName(), review.getComment(), review.getGrade());
+        String sql = "Insert Into reviews (attractionId, userId, comment, grade) Values (?, ?, ?, ?)";
+        jdbcTemplate.update(sql, review.getAttraction().getId(), review.getUser().getId(), review.getComment(), review.getGrade());
     }
 
     public List<Review> getReviewsById(String attractionId) {

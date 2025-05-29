@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dao.AttractionDao;
 import com.example.dao.ReviewDao;
+import com.example.dao.UserDao;
 import com.example.model.Attraction;
 import com.example.model.Review;
+import com.example.model.User;
 
 @RestController
 @RequestMapping("/api")
@@ -23,6 +25,8 @@ public class AttractionController {
     private AttractionDao attractionDao;
     @Autowired
     private ReviewDao reviewDao;
+    @Autowired
+    private UserDao userDao;
 
     @GetMapping("/attractions")
     public List<Attraction> getAllAttractions() {
@@ -59,4 +63,19 @@ public class AttractionController {
     public void deleteReview(@PathVariable("id") String id) {
         reviewDao.deleteReview(id);
     }
+
+    @PostMapping("/users")
+    public void saveUser(@RequestBody User user) {
+        userDao.saveUser(user);
+    }
+
+    @PostMapping("/users/verify")
+    public String validityTest(@RequestBody User user){
+        String userId = userDao.validityTest(user);
+        if(userId == null) {
+            return "Invalid username or password";
+        }
+        return userId;
+    }
+    
 }

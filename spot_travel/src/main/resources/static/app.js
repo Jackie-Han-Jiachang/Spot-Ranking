@@ -1,10 +1,28 @@
 $(document).ready(function () {
-  // main function
-
   // home page
   if (
     window.location.pathname === "/index.html" ||
     window.location.pathname === "/"
+  ) {
+    $("#loginForm").on("submit", function (event) {
+      event.preventDefault();
+      verifyUser();
+    });
+  }
+
+  if (
+    window.location.pathname === "/addUser.html" ||
+    window.location.pathname === "/addUser"
+  ) {
+    $("#addUserForm").on("submit", function (event) {
+      event.preventDefault();
+      addUser();
+    });
+  }
+
+  if (
+    window.location.pathname === "/attraction.html" ||
+    window.location.pathname === "/attraction"
   ) {
     loadAttraction();
     $("#addAttractionForm").on("submit", function (event) {
@@ -12,6 +30,7 @@ $(document).ready(function () {
       addAttraction();
     });
   }
+
   // add review page
   if (
     window.location.pathname === "/addReview.html" ||
@@ -38,6 +57,52 @@ $(document).ready(function () {
   }
 });
 
+// add a new user
+function addUser() {
+  const user = {
+    username: $("#username").val(),
+    password: $("#password").val(),
+  };
+  $.ajax({
+    url: "/api/users",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(user),
+    success: function () {
+      $("#addUserForm")[0].reset();
+      alert("User added successfully");
+      window.location.href = "/index.html";
+    },
+    error: function () {
+      alert("Add failed, please try again...");
+      window.location.href = "/index.html";
+    },
+  });
+}
+
+// verify the user login
+function verifyUser() {
+  const user = {
+    username: $("#username").val(),
+    password: $("#password").val(),
+  };
+  $.ajax({
+    url: "/api/users/verify",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(user),
+    success: function (userId) {
+      localStorage.setItem("loggedInUserId", userId);
+      alert("Login successful");
+      window.location.href = "/attraction.html";
+    },
+    error: function () {
+      alert("Login failed, please check your username and password");
+      window.location.href = "/index.html";
+    },
+  });
+}
+
 function loadAttraction() {
   $.get("/api/attractions", function (data) {
     $("#attractionList").empty();
@@ -61,28 +126,27 @@ function loadAttractionForReview(attractionId) {
     $("#attractionLocation").text(data.location);
   }).fail(function () {
     alert("Failed to load attraction data");
-    window.location.href = "/index.html";
+    window.location.href = "/attraction.html";
   });
 }
 
 function loadReviews(attractionId) {
-
-    $.get("/api/reviews/" + attractionId, function (reviews) {
-      $("#reviewList").empty();
-      reviews.forEach((review) => {
-        // add the review to the list
-        $("#reviewList").append(`
+  $.get("/api/reviews/" + attractionId, function (reviews) {
+    $("#reviewList").empty();
+    reviews.forEach((review) => {
+      // add the review to the list
+      $("#reviewList").append(`
           <li>
-            <p>User: ${review.userName}</p>
+            <p>User: ${review.user.username}</p>
             <p>Review: ${review.comment}</p>
             <p>Grade: ${review.grade}</p>
             <button onclick="removeReview('${review.id}')"> Remove </button>
           </li>
         `);
-      });
-    }).fail(function () {
+    });
+  }).fail(function () {
     alert("Failed to load reviews");
-    window.location.href = "/index.html";
+    window.location.href = "/attraction.html";
   });
 }
 
@@ -124,9 +188,14 @@ function removeAttraction(id) {
 }
 
 function addReview(attractionId) {
+  const userId = localStorage.getItem("loggedInUserId");
+  if (!userId || userId === "undefined") {
+    alert("You must be logged in");
+    return;
+  }
   const review = {
     attraction: { id: attractionId },
-    userName: $("#userName").val(),
+    user: { id: userId },
     comment: $("#comment").val(),
     grade: parseInt($("#grade").val()),
   };
@@ -137,7 +206,7 @@ function addReview(attractionId) {
     data: JSON.stringify(review),
     success: function () {
       alert("Review added successfully");
-      window.location.href = "/index.html";
+      window.location.href = "/attraction.html";
     },
     error: function () {
       alert("Failed to add review");
@@ -145,15 +214,15 @@ function addReview(attractionId) {
   });
 }
 
-function removeReview(id){
-    $.ajax({
-      url: "/api/reviews/" + id,
-      type: "DELETE",
-      success: function () {
-        loadReviews(attractionId);
-      },
-      error: function () {
-        alert("Delete failed, please try again...");
-      },
-    })
-  }
+function removeReview(id) {
+  $.ajax({
+    url: "/api/reviews/" + id,
+    type: "DELETE",
+    success: function () {
+      loadReviews(attractionId);
+    },
+    error: function () {
+      alert("Delete failed, please try again...");
+    },
+  });
+}
