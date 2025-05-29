@@ -53,7 +53,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.example.YourMainClass</mainClass>
+                            <mainClass>com.example.SpotApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
