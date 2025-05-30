@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <!-- P=manage everything for spring boot-->
     <!--https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-parent-->
+    <!-- https://maven.apache.org/shared/maven-archiver/examples/classpath.html#Make -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
