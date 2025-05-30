@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AttractionDao {
 
-    @Autowired // so that i do not need to create a constructor
+    @Autowired // it set up everything automatically, so that i do not need to create a constructor. code is more concise
     private JdbcTemplate jdbcTemplate;
 
     // map the database table to the attraction
@@ -43,18 +43,22 @@ public class AttractionDao {
         }
     }
 
+    // get all attractions from the database and present them in the webpage
     public List<Attraction> getAllAttractions() {
         String sql = "Select * From attractions";
         return jdbcTemplate.query(sql, (rs, rowNum) -> mapToAttraction(rs, rowNum));
     }
 
+    // delete the attraction from the database.
+    // attraction is related to reviews, so delete the reviews first
     public void deleteAttraction(String id) {
-        String deleteReviewsSql = "DELETE FROM reviews WHERE attractionId = ?";
+        String deleteReviewsSql = "Delete From reviews Where attractionId = ?";
         jdbcTemplate.update(deleteReviewsSql, id);
         String sql = "Delete From attractions Where id = ?";
         jdbcTemplate.update(sql, id);
     }
 
+    // get the attraction information by its id so that it can be related to the reviews
     public List<Attraction> getAttractionById(String id) {
         String sql = "Select * From attractions Where id = ?";
         return jdbcTemplate.query(sql, (rs, rowNum) -> mapToAttraction(rs, rowNum), id);

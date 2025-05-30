@@ -3,13 +3,13 @@
 -- https://www.w3schools.com/sql/default.asp
 CREATE TABLE IF NOT EXISTS attractions(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
     location VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS users(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    userName VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL
 );
 

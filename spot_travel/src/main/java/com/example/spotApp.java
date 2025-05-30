@@ -11,7 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpotApp {
   public static void main(String[] args) throws SQLException {
+    // Initialize the H2 database connection from application
     Connection conn = DriverManager.getConnection("jdbc:h2:file:./data/attractionDB", "sa", "");
+    // run the Spring Boot application
     SpringApplication.run(SpotApp.class, args);
     conn.close();
   }

@@ -1,15 +1,17 @@
 $(document).ready(function () {
-  // home page
+  // login page. I set it as the default page so that when the user opens the app, they will see the login page
   if (
     window.location.pathname === "/index.html" ||
-    window.location.pathname === "/"
-  ) {
+    window.location.pathname === "/" // check current path
+  ) { // $ means jQuery manages the get and post requests
+    // on means a listener for the submit event
     $("#loginForm").on("submit", function (event) {
-      event.preventDefault();
+      event.preventDefault(); // prevent the default form submission
       verifyUser();
     });
   }
-
+  // register page
+  // send the data to the server so that the user can be added to the database
   if (
     window.location.pathname === "/addUser.html" ||
     window.location.pathname === "/addUser"
@@ -19,7 +21,8 @@ $(document).ready(function () {
       addUser();
     });
   }
-
+  // attraction page
+  // load all the attractions and listen for the submit event of the form
   if (
     window.location.pathname === "/attraction.html" ||
     window.location.pathname === "/attraction"
@@ -32,13 +35,13 @@ $(document).ready(function () {
   }
 
   // add review page
+  // entering review submission page. each review is connected to an attraction
   if (
     window.location.pathname === "/addReview.html" ||
     window.location.pathname === "/addReview"
   ) {
     const urlParams = new URLSearchParams(window.location.search);
-    attractionId = urlParams.get("id");
-    loadAttractionForReview(attractionId);
+    attractionId = urlParams.get("id"); // get the attraction id from the url
     $("#addReviewForm").on("submit", function (event) {
       event.preventDefault();
       addReview(attractionId);
@@ -46,6 +49,7 @@ $(document).ready(function () {
   }
 
   // view review page
+  // load the reviews for the attraction according to the attraction id
   if (
     window.location.pathname === "/viewReview.html" ||
     window.location.pathname === "/viewReview"
@@ -59,19 +63,20 @@ $(document).ready(function () {
 
 // add a new user
 function addUser() {
+  // define the user first. This is the same as user model in backend
   const user = {
     username: $("#username").val(),
     password: $("#password").val(),
   };
-  $.ajax({
-    url: "/api/users",
+  $.ajax({ // use ajax to post the data to the server
+    url: "/api/users", // define where to post. The link between backend and frontend
     type: "POST",
     contentType: "application/json",
     data: JSON.stringify(user),
     success: function () {
-      $("#addUserForm")[0].reset();
+      $("#addUserForm")[0].reset(); // reset and wait for the next register of the form after successful submission
       alert("User added successfully");
-      window.location.href = "/index.html";
+      window.location.href = "/index.html"; // redirect to the login page
     },
     error: function () {
       alert("Add failed, please try again...");
@@ -92,7 +97,7 @@ function verifyUser() {
     contentType: "application/json",
     data: JSON.stringify(user),
     success: function (userId) {
-      localStorage.setItem("loggedInUserId", userId);
+      localStorage.setItem("loggedInUserId", userId); // keep login state in webpage. The username can be retrieved directly from the localStorage
       alert("Login successful");
       window.location.href = "/attraction.html";
     },
@@ -103,11 +108,12 @@ function verifyUser() {
   });
 }
 
+// load all the attractions from the server and display them in the list
 function loadAttraction() {
   $.get("/api/attractions", function (data) {
-    $("#attractionList").empty();
-    data.forEach((attraction) => {
-      // add the attraction to the list
+    $("#attractionList").empty(); // clean the list before adding new attractions
+    data.forEach((attraction) => { 
+      // add the attractions to the list and update their display format
       $("#attractionList").append(`
                     <li>
                     ${attraction.name} - ${attraction.location}
@@ -117,36 +123,6 @@ function loadAttraction() {
                     </li>
                 `);
     });
-  });
-}
-
-function loadAttractionForReview(attractionId) {
-  $.get("/api/attractions/" + attractionId, function (data) {
-    $("#attractionName").text(data.name);
-    $("#attractionLocation").text(data.location);
-  }).fail(function () {
-    alert("Failed to load attraction data");
-    window.location.href = "/attraction.html";
-  });
-}
-
-function loadReviews(attractionId) {
-  $.get("/api/reviews/" + attractionId, function (reviews) {
-    $("#reviewList").empty();
-    reviews.forEach((review) => {
-      // add the review to the list
-      $("#reviewList").append(`
-          <li>
-            <p>User: ${review.user.username}</p>
-            <p>Review: ${review.comment}</p>
-            <p>Grade: ${review.grade}</p>
-            <button onclick="removeReview('${review.id}')"> Remove </button>
-          </li>
-        `);
-    });
-  }).fail(function () {
-    alert("Failed to load reviews");
-    window.location.href = "/attraction.html";
   });
 }
 
@@ -187,9 +163,32 @@ function removeAttraction(id) {
   });
 }
 
+// load all the reviews for a specific attraction. Quite similar to the loadAttraction function
+function loadReviews(attractionId) {
+  $.get("/api/reviews/" + attractionId, function (reviews) {
+    $("#reviewList").empty();
+    reviews.forEach((review) => {
+      // add the review to the list
+      $("#reviewList").append(`
+          <li>
+            <p>User: ${review.user.username}</p>
+            <p>Review: ${review.comment}</p>
+            <p>Grade: ${review.grade}</p>
+            <button onclick="removeReview('${review.id}')"> Remove </button>
+          </li>
+        `);
+    });
+  }).fail(function () {
+    alert("Failed to load reviews");
+    window.location.href = "/attraction.html";
+  });
+}
+
+// add a new review for a specific attraction
 function addReview(attractionId) {
-  const userId = localStorage.getItem("loggedInUserId");
-  if (!userId || userId === "undefined") {
+  const userId = localStorage.getItem("loggedInUserId");  // the user id is stored in the localStorage after login
+  // check if the user is logged in
+  if (!userId || userId === "undefined") { 
     alert("You must be logged in");
     return;
   }
@@ -214,6 +213,7 @@ function addReview(attractionId) {
   });
 }
 
+//remove a review by its id
 function removeReview(id) {
   $.ajax({
     url: "/api/reviews/" + id,
