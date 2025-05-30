@@ -1,5 +1,35 @@
 # Spot-Ranking
 
+## Releasing log
+
+- An excutable jar `spot_travel-1.0.0.jar` is added can be found in `spot_travel/target`.
+
+### Instruction for using the project
+
+- You need to have java installed. Type in:
+
+```bash
+java -version
+```
+
+to check whether you have java installed. Terminal should output:
+
+```bash
+java version "23.0.1"
+```
+
+After installing Java, find `spot_travel-1.0.0.jar` and type in:
+
+```bash
+java -jar spot_travel-1.0.0.jar
+```
+
+Then you can access to this website and use the project.
+
+```
+http://localhost
+```
+
 ## The initiation of the project
 
 ### Scenario
@@ -42,8 +72,8 @@ To make travel planning easier and more efficient. Since people are busy with wo
 
 ## Plan of the work based on MVP
 
-| Task Number | Planned Action                          | Planned Outcome                                                                                                                                                                                                                                                                                                                                                                                                                                           | Time Estimated | Target Completion Date |
-|-------------|------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|-------------------------|
+| Task Number | Planned Action | Planned Outcome  | Time Estimated | Target Completion Date |
+|---|---|---|---|---|
 | 1           | Make a plan for frontend, backend, and connection. | A simple HTTPServer and HTML cannot handle complex user-webpage interactions (add new attraction, add reviews, view reviews, etc.). A bigger project plan is needed. Frontend uses HTML for structure and CSS for styling. Backend uses Spring Boot (replacing HTTPServer), with controllers and DAOs to interact with a remote H2 database. JavaScript connects frontend and backend, handling data exchange between user input and storage.            | 1 day          | 21-May                 |
 | 2           | Set up Spring Boot                       | Spring Boot handles routing and headers automatically. Using `@SpringBootApplication`, the main class can run `index.html` by default and handle JSON files.                                                                                                                                                                                                                                                                                            | 2 days         | 23-May                 |
 | 3           | Learn basic JavaScript                   | Required for DOM manipulation and frontend-backend interaction. JavaScript converts objects to JSON and supports operations like opening windows and adding/removing reviews. Each attraction includes Name, Location, and reviews.                                                                                                         | 2 days         | 23-May                 |
