@@ -21,7 +21,7 @@ java version "23.0.1"
 After installing Java, find `spot_travel-1.0.2.jar` and type in:
 
 ```bash
-java -jar spot_travel-1.0.1.jar
+java -jar spot_travel-1.0.2.jar
 ```
 
 Then you can access to this website and use the project.
