@@ -18,10 +18,10 @@ to check whether you have java installed. Terminal should output:
 java version "23.0.1"
 ```
 
-After installing Java, find `spot_travel-1.0.0.jar` and type in:
+After installing Java, find `spot_travel-1.0.2.jar` and type in:
 
 ```bash
-java -jar spot_travel-1.0.0.jar
+java -jar spot_travel-1.0.2.jar
 ```
 
 Then you can access to this website and use the project.
