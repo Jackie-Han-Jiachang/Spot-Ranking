@@ -46,7 +46,9 @@ public class AttractionDao {
     // get all attractions from the database and present them in the webpage
     public List<Attraction> getAllAttractions() {
         String sql = "Select * From attractions";
-        return jdbcTemplate.query(sql, (rs, rowNum) -> mapToAttraction(rs, rowNum));
+        // query is the method that get results from database and convert them to a list of Attraction objects
+        // lambda expression is used to pass the parameters to the mapToAttraction method
+        return jdbcTemplate.query(sql, (rs, rowNum) -> mapToAttraction(rs, rowNum)); 
     }
 
     // delete the attraction from the database.
