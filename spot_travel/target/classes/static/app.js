@@ -56,7 +56,6 @@ $(document).ready(function () {
   ) {
     const urlParams = new URLSearchParams(window.location.search);
     attractionId = urlParams.get("id");
-    loadAttractionForReview(attractionId);
     loadReviews(attractionId);
   }
 });
