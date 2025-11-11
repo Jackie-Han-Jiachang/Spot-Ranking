@@ -5,7 +5,10 @@ public class Attraction {
     private String location;
     private String id;
 
-    public void Attrction(String id, String name, String description, String location) {
+    public Attraction(){
+    }
+
+    public Attraction(String id, String name, String location) {
         this.id = id;
         this.name = name;
         this.location = location;
